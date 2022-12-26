@@ -1,0 +1,27 @@
+{
+    "tea cmds": {
+        "prefix": "tCmds",
+        "description": "insert []tea.Cmd variable",
+        "body": "var cmds []tea.Cmd"
+    },
+    "tea cmd": {
+        "prefix": "tCmd",
+        "description": "insert tea.Cmd variable",
+        "body": "var cmd tea.Cmd"
+    },
+    "tea model": {
+        "prefix": "tModel",
+        "description": "create a tea.Model",
+        "body": "type ${1:Model} struct {}\n\nvar _ tea.Model = ${1:Model}{}\n\nfunc (m ${1:Model}) Init() tea.Cmd { return nil }\nfunc (m ${1:Model}) Update(msg tea.Msg) (tea.Model, tea.Cmd) {\n\treturn m, nil\n}\nfunc (m ${1:Model}) View() string {\n\treturn \"\"\n}"
+    },
+    "tea message switch": {
+        "prefix": "tMsg",
+        "description": "tea message switch",
+        "body": "switch msg := msg.(type) {\ncase tea.KeyMsg:\n\tswitch msg.Type {\n\tcase tea.KeyCtrlC:\n\t\treturn m, tea.Quit\n\t}\ncase tea.WindowSizeMsg:\n\n}"
+    },
+    "tea app": {
+        "prefix": "tApp",
+        "description": "complete tea application",
+        "body": "package main\n\nimport (\n\ttea \"github.com/charmbracelet/bubbletea\"\n)\n\ntype model struct{}\n\nfunc (m model) Init() tea.Cmd { return nil }\nfunc (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {\n\tswitch msg := msg.(type) {\n\tcase tea.KeyMsg:\n\t\tswitch msg.Type {\n\t\tcase tea.KeyCtrlC:\n\t\t\treturn m, tea.Quit\n\t\t}\n\t}\n\tvar cmds []tea.Cmd\n\treturn m, tea.Batch(cmds...)\n}\nfunc (m model) View() string {\n\treturn \"Hello World\"\n}\n\nfunc main() {\n\tm := model{}\n\n\tapp := tea.NewProgram(m, tea.WithAltScreen())\n\tif _, err := app.Run(); err != nil {\n\t\tpanic(err)\n\t}\n}"
+    }
+}
