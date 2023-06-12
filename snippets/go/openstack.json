@@ -1,0 +1,12 @@
+{
+    "osclient_import": {
+        "prefix": "osimport",
+        "body": "\"github.com/gophercloud/gophercloud/openstack\"\n\"github.com/gophercloud/utils/openstack/clientconfig\"",
+        "description": "import strings for the openstack client"
+    },
+    "openstack_client": {
+        "prefix": "osclient",
+        "body": "opts := clientconfig.ClientOpts{}\nclientOpts, err := clientconfig.AuthOptions(\u0026opts)\nif err != nil {\n\tpanic(err)\n}\n\nprovider, err := openstack.AuthenticatedClient(*clientOpts)\nif err != nil {\n\tpanic(err)\n}",
+        "description": "simplify creation of os client"
+    }
+}

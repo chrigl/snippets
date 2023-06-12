@@ -8,6 +8,10 @@
             {
                 "language": "go",
                 "path": "./snippets/go/tea.json"
+            },
+            {
+                "language": "go",
+                "path": "./snippets/go/openstack.json"
             }
         ]
     }
